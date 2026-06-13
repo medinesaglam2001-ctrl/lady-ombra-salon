@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lady Ombra - Salon</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cinzel+Decorative:wght@400;700&display=swap');
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body, html {
+            height: 100%; font-family: 'Montserrat', sans-serif;
+            background-color: #000000; color: #ffffff;
+            overflow-x: hidden; overflow-y: auto; scroll-behavior: smooth;
+        }
+
+        /* GERÇEK MELEKLİ VE İLAHİ BULUTLU ATMOSFER (IMAGE 22 BİREBİR) */
+        .envelope-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #000000 !important;
+            /* Dış link bağımlılığını yok etmek için altın parıltılı ilahi bulut ve melek ışığı doğrudan CSS ile üretildi */
+            background-image: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.85)), 
+                              radial-gradient(circle at 50% 30%, #4a351a 0%, #171007 45%, #000000 90%) !important;
+            background-size: cover !important; background-position: center center !important;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 9999;
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
+        }
+        .envelope-container::before {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 35%, rgba(229, 193, 88, 0.12) 0%, transparent 55%);
+            pointer-events: none;
+        }
+
+        /* Image 23'teki Gerçek Dokulu Eskitme Parşömen Mektup Zarfı */
+        .real-letter-card {
+            position: relative; width: 560px; height: 350px;
+            background: #bfa37a !important;
+            background-image: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1), rgba(0,0,0,0.3)),
+                              url('https://www.transparenttextures.com/patterns/parchment.png') !important;
+            box-shadow: 0 45px 95px rgba(0,0,0,0.95);
+            display: flex; justify-content: center; align-items: center;
+            border-radius: 3px;
+        }
+        .real-letter-card::before {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, transparent 49%, rgba(0,0,0,0.15) 50%, transparent 52%),
+                        linear-gradient(45deg, transparent 49%, rgba(0,0,0,0.15) 50%, transparent 52%);
+            pointer-events: none;
+        }
+
+        /* Image 23'teki Basık Bordo Hanedan Armalı Damga */
+        .wax-seal {
+            position: relative; width: 100px; height: 100px;
+            background: radial-gradient(circle at 35% 35%, #801010 0%, #360303 75%, #170101 100%) !important;
+            border-radius: 46% 52% 48% 54% / 44% 46% 54% 52% !important;
+            box-shadow: inset 1px 3px 5px rgba(255,255,255,0.2), inset -2px -4px 8px rgba(0,0,0,0.9), 0 12px 25px rgba(0,0,0,0.85) !important;
+            display: flex; justify-content: center; align-items: center; cursor: pointer;
+            transition: transform 0.4s ease; border: 1px solid #140101 !important;
+        }
+        .wax-seal-inner {
+            width: 70px; height: 70px; border-radius: 50%;
+            border: 2px solid rgba(20, 1, 1, 0.3);
+            display: flex; justify-content: center; align-items: center;
+            color: #140101; font-family: 'Cinzel Decorative', serif; font-size: 2rem;
+            font-weight: bold; background: radial-gradient(circle, #420404 0%, #210101 100%);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
+        }
+        .enter-btn { margin-top: 30px; background: transparent; border: none; color: #ffffff !important; font-family: 'Cinzel Decorative', serif; font-size: 0.8rem; letter-spacing: 4px; cursor: pointer; font-weight: bold; text-transform: uppercase; opacity: 0.75; }
+        .enter-btn:hover { opacity: 1; }
+        .envelope-container.open { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+
+        /* WEGİC ORİJİNAL İNCE VE PARILTILI GOLD TASARIM SİSTEMİ */
+        header {
+            width: 100%; padding: 35px 60px; display: flex; justify-content: space-between; align-items: center;
+            position: absolute; top: 0; left: 0; z-index: 100; background: linear-gradient(to bottom, #000000 60%, transparent);
+        }
+        .logo-main { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; color: #ffffff !important; letter-spacing: 2px; font-weight: 300; text-transform: uppercase; }
+        .logo-sub { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; color: #e5c158 !important; letter-spacing: 2px; text-transform: uppercase; margin-top: 5px; font-weight: bold; }
+        
+        .nav-right { display: flex; align-items: center; gap: 40px; }
+        .gazette-date { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; color: #888888 !important; letter-spacing: 1px; }
+        .lang-selector { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; display: flex; gap: 12px; }
+        .lang-btn { color: #555555; cursor: pointer; background: transparent; border: none; font-weight: 600; font-family: inherit; }
+        .lang-btn:hover, .lang-btn.active { color: #ffffff; }
+
+        /* MANŞET VE ASİL KADIN ALANI (IMAGE 17 BİREBİR) */
+        .hero-section {
+            position: relative; width: 100%; height: 100vh; display: flex; align-items: center; padding: 0 10%;
+            background-color: #000000 !important; overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute; top: 0; right: 0; width: 55%; height: 100%;
+            background: url('https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=1000&auto=format&fit=crop') no-repeat center center !important;
+            background-size: cover !important; z-index: 1; filter: brightness(0.35) contrast(1.05) !important;
+        }
+        .hero-section::after {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, #000000 45%, rgba(0,0,0,0.85) 60%, transparent 100%) !important; z-index: 2;
+        }
+        .hero-content { max-width: 650px; z-index: 10; position: relative; }
+        
+        .hero-title { font-family: 'Montserrat', sans-serif; font-size: 3.8rem; line-height: 1.15; color: #ffffff !important; margin-bottom: 25px; font-weight: 300; letter-spacing: 1px; text-transform: uppercase; }
+        .hero-title span { display: block; color: #e5c158 !important; font-weight: 400; margin-top: 5px; }
+        .hero-desc { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #888888 !important; line-height: 1.6; font-style: italic; }
+
+        /* PORTAL MATRİS DÜZENİ (IMAGE 18 & 19 BİREBİR) */
+        .main-container { max-width: 1400px; margin: 0 auto; padding: 80px 40px; display: grid; grid-template-columns: 1.75fr 1.25fr; gap: 60px; background-color: #000000 !important; }
+        .section-header { font-family: 'Montserrat', sans-serif; font-size: 1.4rem; color: #ffffff !important; letter-spacing: 2px; margin-bottom: 35px; border-bottom: 1px solid #111111; padding-bottom: 12px; text-transform: uppercase; font-weight: 300; }
+        
+        .whisper-feed { display: flex; flex-direction: column; gap: 30px; }
+        .whisper-card { background: #050505 !important; border: 1px solid #111111 !important; padding: 35px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+        .whisper-card:hover { border-color: #e5c158 !important; }
+        .whisper-card-text { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: #ffffff !important; line-height: 1.6; margin-bottom: 20px; font-style: italic; }
+        .whisper-card-meta { display: flex; justify-content: flex-end; border-top: 1px solid #111111; padding-top: 15px; }
+        .whisper-card-author { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; color: #e5c158 !important; letter-spacing: 1px; font-weight: bold; }
+
+        .sidebar { display: flex; flex-direction: column; gap: 50px; }
+        .philosopher-premium-box { background: #050505 !important; border: 1px solid #111111 !important; padding: 35px; text-align: center; }
+        .p-quote { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-style: italic; color: #ffffff !important; line-height: 1.6; margin-bottom: 18px; }
+        .p-author { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; color: #e5c158 !important; letter-spacing: 2px; font-weight: bold; text-transform: uppercase; }
+
+        .write-panel { background: #050505 !important; border: 1px solid #111111 !important; padding: 35px; }
+        .secret-editor { width: 100%; height: 150px; background: transparent; border: none; font-family: 'Playfair Display', serif; font-size: 1.2rem; line-height: 1.6; color: #ffffff !important; resize: none; outline: none; margin-bottom: 25px; font-style: italic; border-bottom: 1px solid #111111; }
+        .publish-btn { width: 100%; background: #e5c158 !important; color: #000000 !important; border: none; padding: 16px; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; cursor: pointer; letter-spacing: 2px; font-weight: bold; text-transform: uppercase; }
+        
+        .premium-story { background: #050505 !important; border: 1px solid #111111 !important; padding: 30px; position: relative; min-height: 130px; display: flex; align-items: center; }
+        .story-blur { color: #1a1a1a !important; user-select: none; font-size: 1rem; font-style: italic; filter: blur(4px); line-height: 1.6; }
+        .lock-badge { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98) !important; display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: 'Montserrat', sans-serif; font-size: 0.7rem; color: #e5c158 !important; cursor: pointer; text-align: center; border: 1px dashed #111111; padding: 20px; letter-spacing: 1px; }
+
+        .subscribe-box { background: #050505 !important; border: 1px solid #111111 !important; padding: 35px; text-align: center; }
+        .subscribe-box h4 { font-family: 'Montserrat', sans-serif; font-size: 0.85rem; color: #e5c158 !important; margin-bottom: 12px; letter-spacing: 2px; text-transform: uppercase; }
+        .subscribe-box p { font-size: 0.8rem; font-style: italic; margin-bottom: 25px; color: #555555 !important; line-height: 1.5; }
+        .sub-input { width: 100%; padding: 14px; margin-bottom: 15px; background: #000000 !important; border: 1px solid #111111 !important; outline: none; font-family: 'Playfair Display', serif; color: #ffffff !important; font-size: 1rem; text-align: center; }
+        .sub-btn { width: 100%; background: #111111 !important; color: #e5c158 !important; border: 1px solid #222222 !important; padding: 14px; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; cursor: pointer; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; }
+        .sub-btn:hover { background: #e5c158 !important; color: #000000 !important; }
+    </style>
+</head>
+<body>
+
+    <!-- MÜHÜRLÜ VE MELEKLİ GERÇEK ZARF EKRANI -->
+    <div class="envelope-container" id="envelope">
+        <div class="real-letter-card">
+            <div class="wax-seal" onclick="triggerSecretClick(event)">
+                <div class="wax-seal-inner">Ω</div>
+            </div>
+        </div>
+        <button class="enter-btn" id="lblEnterBtn" onclick="openEnvelope()">Salona Giriş</button>
+    </div>
+
+    <!-- HEADER BAR -->
+    <header>
+        <div class="logo-area">
+            <span class="logo-main">Lady Ombra</span>
+            <span class="logo-sub" id="lblLogoSub">GİZLİDİR, GÜÇLÜDÜR, YAZAR.</span>
+        </div>
+        <div class="nav-right">
+            <div class="gazette-date" id="liveDate"></div>
+            <div class="lang-selector">
+                <button class="lang-btn active" onclick="switchLang('tr', event)">TR</button>
+                <button class="lang-btn" onclick="switchLang('en', event)">EN</button>
+                <button class="lang-btn" onclick="switchLang('fr', event)">FR</button>
+                <button class="lang-btn" onclick="switchLang('it', event)">IT</button>
+                <button class="lang-btn" onclick="switchLang('de', event)">DE</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="author-badge" id="authorBadge">✒️ Lady Ombra'nın Kalemi</div>
+            <h1 class="hero-title" id="heroTitle">Sırlar Gölgede Kalır. <span>Biz Yazarız.</span></h1>
+            <p class="hero-desc" id="heroDesc">Lady Ombra, seçkin çevrelerin anlatılmamış hikayelerini yayımlar. Kimliğinizi korur, gerçeği kaydeder.</p>
+        </div>
+    </section>
+
+    <!-- MAIN GRID -->
+    <main class="main-container">
+        <section>
+            <div class="section-header"><span id="lblPublicTitle">Onaylanmış Fısıltılar</span></div>
+            <div class="whisper-feed" id="publicWhispers"></div>
+        </section>
+        <aside class="sidebar">
+            <div class="philosopher-premium-box">
+                <p class="p-quote" id="quoteText">"Secret de deux, secret de Dieu; secret de three, secret de tous."</p>
+                <p class="p-author" id="quoteAuthor">~ Proverbe Français</p>
+            </div>
+            <div class="write-panel">
+                <div class="section-header"><span id="writeTitle">Bir Fısıltı Bırakın</span></div>
+                <textarea class="secret-editor" id="secretInput" placeholder="Mürekkebinizi akıtın..."></textarea>
+                <button class="publish-btn" id="submitBtn" onclick="submitToApproval()">Lady Ombra'ya Postala</button>
+            </div>
+            <div>
+                <div class="section-header"><span id="lblPrivateTitle">Özel Sırlar (Mühürlü)</span></div>
+                <div class="premium-story">
+                    <div class="story-blur">Düşesin büyük sırrı sarayın mahzenlerinde fısıldanıyor... En kritik diplomatik sırlar burada mühürlendi.</div>
+                    <div class="lock-badge" id="lockBadge" onclick="focusSubscribe()">
+                        🔒 <span id="lblLockText">Bu çok önemli konu sadece Özel Aboneler içindir.<br><b>[Mühre Katıl]</b></span>
+                    </div>
+                </div>
+            </div>
+            <div class="subscribe-box">
+                <h4 id="lblBoxTitle">Mühre Ortak Olun</h4>
+                <p id="lblBoxDesc">Lady Ombra'nın en derin gizli hikayelerini okumak için e-postanızı bırakın.</p>
+                <input type="email" class="sub-input" id="subEmail" placeholder="E-posta adresiniz...">
+                <button class="sub-btn" id="lblBoxBtn" onclick="subscribeUser()">Abone Listesine Yazıl</button>
+            </div>
+        </aside>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const _URL = "https://ilrtykjtorodpvafcdgj.supabase.co";
+        const _KEY = "sb_publishable_T6dlkvJwRC7tMkvesNiNJg_YzgPGQt9";
+        const dbClient = supabase.createClient(_URL, _KEY);
+
+        let isAuthorMode = false;
+        let sealClickCount = 0;
+        let clickTimer = null;
+        let currentLang = 'tr';
+
+        const mysteriousNames = ["Lady Aurelia", "Comtesse d'Ombra", "Mademoiselle Valeris", "Baroness de Secret", "Duchesse Noire"];
+
+        const translations = {
+            tr: {
+                enterBtn: "Salona Giriş", subtitle: "GİZLİDİR, GÜÇLÜDÜR, YAZAR.",
+                heroTitle: "Sırlar Gölgede Kalır. <span>Biz Yazarız.</span>",
+                heroDesc: "Lady Ombra, seçkin çevrelerin anlatılmamış hikayelerini yayımlar. Kimliğinizi korur, gerçeği kaydeder.",
+                writeTitle: "Bir Fısıltı Bırakın", placeholder: "Mürekkebinizi akıtın...",
+                postBtn: "Lady Ombra'ya Postala", publicTitle: "Onaylanmış Fısıltılar",
+                privateTitle: "Özel Sırlar (Mühürlü)", lockText: "Bu çok önemli konu sadece Özel Aboneler içindir.<br><b>[Mühre Katıl]</b>",
+                boxTitle: "Mühre Ortak Olun", boxDesc: "Lady Ombra'nın en derin gizli hikayelerini okumak için e-postanızı bırakın.",
+                boxBtn: "Abone Listesine Yazıl", authorBadge: "✒️ Lady Ombra'nın Kalemi"
+            }
+        };
+
+        function updateDate() {
+            const today = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('liveDate').innerText = today.toLocaleDateString('fr-FR', options);
+        }
+
+        function openEnvelope() {
+            document.getElementById('envelope').style.transform = 'translateY(-100%)';
+            setTimeout(() => { fetchApprovedWhispers(); }, 600);
+        }
+
+        async function fetchApprovedWhispers() {
+            const { data, error } = await dbClient.from('whispers').select('content, author_mask').eq('status', 'approved').order('created_at', { ascending: false });
+            if (!error) {
+                const listDiv = document.getElementById('publicWhispers');
+                listDiv.innerHTML = "";
+                data.forEach(item => {
+                    const card = document.createElement('div');
+                    card.classList.add('whisper-card');
+                    const mask = item.author_mask || mysteriousNames[Math.floor(Math.random() * mysteriousNames.length)];
+                    card.innerHTML = `<p class="whisper-card-text">"${item.content}"</p><div class="whisper-card-meta"><span class="whisper-card-author">~ ${mask}</span></div>`;
+                    listDiv.appendChild(card);
+                });
+            }
+        }
+
+        function triggerSecretClick(e) {
+            sealClickCount++;
+            clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => { sealClickCount = 0; }, 3000);
+            if (sealClickCount === 3) {
+                sealClickCount = 0;
+                const password = prompt("Gölgenin parolasını fısıldayın / Pass:");
+                if (password === "ombra1905") {
+                    isAuthorMode = true;
+                    document.getElementById('authorBadge').style.display = 'block';
+                    document.getElementById('lockBadge').style.display = 'none';
+                    openEnvelope();
+                }
+            }
+        }
+
+        updateDate();
+    </script>
+</body>
+</html>
