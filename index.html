@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lady Ombra | Sırlar Gölgede Kalır</title>
+    <title>Lady Ombra - Salon</title>
     <style>
-        /* Genel Lüks Rokoko Tasarım Kuralları */
+        /* Tasarım Temelleri ve Font Sınırları */
         * {
             margin: 0;
             padding: 0;
@@ -14,230 +14,337 @@
         body, html {
             height: 100%;
             font-family: 'Times New Roman', Times, serif;
-            background-color: #0d0d0d;
-            color: #e5e5e5;
+            background-color: #0b0b0b;
+            color: #ffffff;
             overflow-x: hidden;
         }
 
-        /* 1. AŞAMA: MÜHÜRLÜ ZARF AÇILIŞI */
+        /* 1. PERDE: image_15.png BİREBİR GİRİŞ EKRANI */
         #splash-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, rgba(20,20,20,1) 0%, rgba(5,5,5,1) 100%);
-            display: flex; justify-content: center; align-items: center;
+            background-image: url('image_15.png');
+            background-size: cover;
+            background-position: center;
             z-index: 9999;
-            transition: opacity 1.5s ease-in-out, visibility 1.5s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1.2s ease-in-out, visibility 1.2s;
         }
-        .envelope-container { text-align: center; cursor: pointer; }
-        .wax-seal {
-            width: 130px; height: 130px;
-            background: radial-gradient(circle, #8a1414 0%, #4a0505 100%);
-            border-radius: 50%; border: 3px solid #3a0303;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2), inset 0 0 15px rgba(0,0,0,0.6);
-            display: flex; justify-content: center; align-items: center; margin: 0 auto;
-            transition: transform 0.6s ease;
+        .seal-trigger {
+            width: 120px; height: 120px;
+            border-radius: 50%; cursor: pointer;
+            position: absolute; transform: translateY(15px);
+            background: transparent; z-index: 10000;
         }
-        .wax-seal::before { content: "LO"; color: #1a0202; font-family: 'Georgia', serif; font-size: 32pt; font-weight: bold; letter-spacing: 2px; }
-        .envelope-text { margin-top: 25px; color: #d4af37; font-size: 11pt; letter-spacing: 4px; text-transform: uppercase; font-style: italic; }
 
-        /* 2. AŞAMA: CANLI GAZETE PORTAL */
+        /* 2. PERDE: SİTE İÇ KISMI - GÖRSELLERİNİZLE BİREBİR AYNI DÜZEN */
         #main-site {
             opacity: 0; visibility: hidden;
-            transition: opacity 2s ease-in-out;
-            padding: 40px 20px; max-width: 1400px; margin: 0 auto;
-        }
-        .gold-border-box {
-            border: 1px solid #d4af37; padding: 30px; position: relative;
-            box-shadow: inset 0 0 30px rgba(212, 175, 55, 0.05);
+            transition: opacity 1.5s ease-in-out;
+            background-color: #0b0b0b;
         }
 
-        header {
-            text-align: center; margin-bottom: 40px;
-            border-bottom: 1px solid #332a15; padding-bottom: 20px;
+        /* ÜST MENÜ ALANI (image_16.png Üst Kısım) */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 60px;
+            background: linear-gradient(to bottom, #000000 0%, transparent 100%);
+            position: absolute; width: 100%; z-index: 100;
         }
-        header h1 { font-size: 45pt; color: #d4af37; letter-spacing: 8px; text-transform: uppercase; font-weight: normal; }
+        .brand-zone h1 {
+            font-size: 28pt; color: #ffffff; font-weight: 300; letter-spacing: 4px; line-height: 1;
+        }
+        .brand-zone span {
+            font-size: 7.5pt; color: #aa913f; letter-spacing: 2px; text-transform: uppercase;
+        }
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a {
+            color: #ffffff; text-decoration: none; font-size: 9.5pt; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; transition: opacity 0.3s;
+        }
+        .nav-links a:hover { opacity: 1; color: #d4af37; }
+        .right-nav { display: flex; align-items: center; gap: 20px; font-size: 9pt; color: #aa913f; }
+
+        /* ANA KARŞILAMA VE BÜYÜK MANŞET (image_16.png) */
+        .hero-section {
+            height: 100vh;
+            background-image: linear-gradient(to right, #0b0b0b 35%, transparent 70%), url('image_16.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding-left: 80px;
+            position: relative;
+        }
+        .hero-content { max-width: 650px; }
+        .hero-title {
+            font-size: 52pt; color: #ffffff; font-weight: 300; letter-spacing: 4px; line-height: 1.1; margin-bottom: 25px;
+        }
+        .hero-title span { color: #ffffff; }
+        .hero-description {
+            font-size: 11pt; color: #aaaaaa; line-height: 1.8; margin-bottom: 40px; font-style: italic;
+        }
+
+        /* LÜKS İNCE GOLD GİZLİ HİKAYE BUTONU */
+        .gold-action-btn {
+            background: transparent; border: 1px solid #d4af37; color: #d4af37;
+            padding: 14px 35px; font-size: 9.5pt; letter-spacing: 3px; text-transform: uppercase;
+            cursor: pointer; transition: all 0.4s;
+        }
+        .gold-action-btn:hover { background: #d4af37; color: #000000; box-shadow: 0 0 20px rgba(212,175,55,0.3); }
+
+        /* BUGÜNÜN SEÇKİLERİ ÜÇLÜ SÜTUN DÜZENİ (image_17.png) */
+        .selections-section { padding: 80px 60px; background-color: #070707; }
+        .section-headline {
+            font-size: 24pt; color: #ffffff; font-weight: normal; letter-spacing: 3px; margin-bottom: 40px; text-transform: uppercase;
+        }
+        .triple-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        .selection-card {
+            background-color: #111111; border: 1px solid #1c1c1c; position: relative; overflow: hidden; height: 420px;
+        }
+        .card-img-bg {
+            width: 100%; height: 100%; background-size: cover; background-position: center;
+            filter: brightness(0.6); transition: transform 0.5s;
+        }
+        .selection-card:hover .card-img-bg { transform: scale(1.03); }
+        .card-overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px;
+            background: linear-gradient(to top, #000000 80%, transparent 100%);
+        }
+        .card-tag { font-size: 8pt; color: #aa913f; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+        .card-title { font-size: 16pt; color: #ffffff; font-weight: normal; margin-bottom: 15px; }
+        .lock-badge { position: absolute; bottom: 30px; right: 30px; color: #aa913f; font-size: 14pt; }
+
+        /* İKİLİ REKLAM / BİLGİ BANDI (image_20.png PANELİ) */
+        .info-dual-banner {
+            display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid #1c1c1c; border-bottom: 1px solid #1c1c1c;
+        }
+        .banner-box { padding: 60px; display: flex; flex-direction: column; justify-content: center; }
+        .banner-left { background-color: #090909; border-right: 1px solid #1c1c1c; }
+        .banner-right {
+            background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('image_20.png');
+            background-size: cover; background-position: center;
+        }
+        .quote-text { font-size: 18pt; font-style: italic; color: #ffffff; line-height: 1.6; margin-bottom: 15px; }
+
+        /* ALT KISIM DÜZENİ VE FORM ALANLARI (image_18.png & image_19.png) */
+        .gazette-footer-structure {
+            background-color: #050505; padding: 80px 60px 40px 60px; border-top: 1px solid #1c1c1c;
+        }
+        .footer-top-grid { display: grid; grid-template-columns: 1.5fr 1fr 1.5fr; gap: 50px; margin-bottom: 60px; }
         
-        /* Çoklu Dil Seçimi Paneli */
-        .meta-bar { display: flex; justify-content: space-between; color: #aa913f; font-size: 10pt; font-style: italic; margin-top: 15px; }
-        .language-selector select {
-            background: transparent; border: none; color: #aa913f; 
-            font-family: 'Times New Roman', Times, serif; font-size: 10pt; cursor: pointer; outline: none;
+        .footer-form-panel h4 {
+            color: #ffffff; font-size: 14pt; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; font-weight: normal;
         }
-
-        .philosopher-quote {
-            text-align: center; font-style: italic; font-size: 12pt; color: #b3b3b3; margin: 30px 0; padding: 15px;
-            border-top: 1px double #d4af37; border-bottom: 1px double #d4af37;
+        .footer-form-panel input, .footer-form-panel textarea {
+            width: 100%; background: #111111; border: 1px solid #222222; color: #ffffff; padding: 14px; margin-bottom: 15px; font-family: 'Times New Roman', serif;
         }
+        .footer-form-panel input:focus, .footer-form-panel textarea:focus { outline: none; border-color: #d4af37; }
 
-        .gazette-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; }
-        .main-stories { border-right: 1px solid #332a15; padding-right: 40px; }
-        
-        /* Hikaye Kartları */
-        .story-card { margin-bottom: 45px; border-bottom: 1px dashed #221c0e; padding-bottom: 25px; position: relative; }
-        .story-card h2 { color: #d4af37; font-size: 20pt; margin-bottom: 12px; font-weight: normal; }
-        .story-card .author { color: #aa913f; font-size: 9pt; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
-        .story-card p { text-align: justify; line-height: 1.7; color: #cccccc; }
-
-        /* LÜKS ABONELİK VE KİLİTLİ İÇERİK TASARIMI (image_5.png stili) */
-        .locked-story { position: relative; overflow: hidden; }
-        .locked-blur { filter: blur(5px); user-select: none; pointer-events: none; opacity: 0.35; }
-        
-        .lock-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            background: linear-gradient(transparent, rgba(13,13,13,0.95)); text-align: center; padding: 20px;
+        /* BİREBİR AMBLEMLİ LOGO ALANI (image_19.png SOL TARAF) */
+        .footer-brand-center { text-align: left; }
+        .lo-crest {
+            width: 70px; height: 70px; border: 1px solid #aa913f; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; margin-bottom: 25px;
+            box-shadow: inset 0 0 10px rgba(170,145,63,0.2);
         }
-        .lock-icon { color: #d4af37; font-size: 24pt; margin-bottom: 10px; text-shadow: 0 0 10px rgba(212,175,55,0.5); }
-        .lock-title { color: #aa913f; font-size: 11pt; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
+        .lo-crest span { font-size: 18pt; color: #aa913f; font-family: 'Georgia', serif; }
+        .footer-logo-text { font-size: 26pt; color: #ffffff; letter-spacing: 4px; text-transform: uppercase; line-height: 1; }
+        .footer-sub-text { font-size: 8pt; color: #aa913f; letter-spacing: 3px; text-transform: uppercase; margin-top: 8px; }
 
-        /* Formlar ve Paneller */
-        .form-panel { background-color: #111111; border: 1px solid #332a15; padding: 30px; margin-bottom: 30px; }
-        .form-panel h3 { color: #d4af37; margin-bottom: 15px; font-weight: normal; letter-spacing: 1px; text-transform: uppercase; }
-        input, textarea { width: 100%; background-color: #070707; border: 1px solid #332a15; color: #e5e5e5; padding: 12px; margin-bottom: 15px; font-family: 'Times New Roman', Times, serif; }
-        input:focus, textarea:focus { outline: none; border-color: #d4af37; }
-        
-        .gold-button {
-            background-color: transparent; border: 1px solid #d4af37; color: #d4af37;
-            padding: 12px 30px; font-size: 10pt; text-transform: uppercase; letter-spacing: 2px;
-            cursor: pointer; width: 100%; transition: all 0.4s;
+        /* LİNKLER VE SOSYAL MEDYA */
+        .footer-links-col h5 { color: #aa913f; font-size: 10pt; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; font-weight: normal; }
+        .footer-links-col ul { list-style: none; }
+        .footer-links-col ul li { margin-bottom: 10px; }
+        .footer-links-col ul a { color: #aaaaaa; text-decoration: none; font-size: 10pt; transition: color 0.3s; }
+        .footer-links-col ul a:hover { color: #ffffff; }
+
+        /* GİZLİ YÖNETİCİ GİRİŞİ PANELİ */
+        .hidden-admin-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5,5,5,0.99);
+            z-index: 10005; display: none; justify-content: center; align-items: center;
         }
-        .gold-button:hover { background-color: #d4af37; color: #000; box-shadow: 0 0 15px rgba(212,175,55,0.3); }
-
-        /* Görünmez Yönetici Girişi */
-        .admin-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 5, 5, 0.98); z-index: 10000; display: none; justify-content: center; align-items: center; }
-        .admin-box { border: 1px solid #d4af37; padding: 40px; background: #0d0d0d; width: 400px; box-shadow: 0 0 50px rgba(212, 175, 55, 0.15); }
+        .admin-entry-box { border: 1px solid #d4af37; padding: 40px; background: #0d0d0d; width: 380px; text-align: center; }
     </style>
 </head>
 <body>
 
-    <!-- 1. Perde: Mühür Ritüeli -->
-    <div id="splash-screen" onclick="openEnvelope()">
-        <div class="envelope-container">
-            <div class="wax-seal" id="seal"></div>
-            <div class="envelope-text">Giriş İçin Mührü Kırın</div>
-        </div>
+    <!-- 1. Perde: image_15.png Birebir Görsel Karşılama Ekranı -->
+    <div id="splash-screen">
+        <div class="seal-trigger" onclick="enterLadyOmbra()"></div>
     </div>
 
-    <!-- 2. Perde: Canlı Gazete -->
+    <!-- 2. Perde: İç Kısım Düzeni (Görsellerinizle Birebir Aynı) -->
     <div id="main-site">
-        <div class="gold-border-box">
-            <header>
+        
+        <!-- Üst Navigasyon Menüsü -->
+        <nav class="navbar">
+            <div class="brand-zone">
                 <h1>LADY OMBRA</h1>
-                <div class="meta-bar">
-                    <span>📍 ROMA - PARİS - LONDRA</span>
-                    <span>📅 13 HAZİRAN 2026</span>
-                    <!-- Çoklu Dil Seçenek Paneli -->
-                    <span class="language-selector">
-                        🌐 DİL / LANG: 
-                        <select onchange="alert('Dil değiştirildi.')">
-                            <option>TR</option>
-                            <option>EN</option>
-                            <option>FR</option>
-                            <option>IT</option>
-                            <option>DE</option>
-                        </select>
-                    </span>
-                </div>
-            </header>
+                <span>GİZLİDİR, GÜÇLÜDÜR, YAZAR.</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">HİKAYELER</a></li>
+                <li><a href="#">KÖŞELER</a></li>
+                <li><a href="#">HAKKIMIZDA</a></li>
+                <li><a href="#">NASIL ÇALIŞIR?</a></li>
+                <li><a href="#">İLETİŞİM</a></li>
+            </ul>
+            <div class="right-nav">
+                <span>TR ▾</span>
+                <span>EN</span>
+                <span style="color: #ffffff; cursor: pointer;">GİRİŞ YAP</span>
+            </div>
+        </nav>
 
-            <div class="philosopher-quote">
-                "En derin sırlar, altından yapılmış ince kafeslerde saklanır." — L'Ombra
+        <!-- Büyük Karşılama Alanı (image_16.png Yerleşimi) -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">SIRLAR GÖLGEDE KALIR.<br><span>BİZ YAZARIZ.</span></h1>
+                <p class="hero-description">Lady Ombra, seçkin çevrelerin anlatılmamış hikayelerini yayımlar. Kimliğinizi korur, gerçeği kaydeder.</p>
+                <button class="gold-action-btn" onclick="document.getElementById('story-form-block').scrollIntoView({behavior: 'smooth'});">GİZLİ BİR HİKAYE GÖNDER ✒️</button>
+            </div>
+        </section>
+
+        <!-- Üçlü Sütün Bölümü: Bugünün Seçkileri (image_17.png Yerleşimi) -->
+        <section class="selections-section">
+            <h2 class="section-headline">BUGÜNÜN SEÇKİLERİ</h2>
+            <div class="triple-grid">
+                
+                <!-- Kart 1 -->
+                <div class="selection-card">
+                    <div class="card-img-bg" style="background-image: url('image_17.png');"></div>
+                    <div class="card-overlay">
+                        <div class="card-tag">İTİRAFLAR</div>
+                        <h3 class="card-title">Aynanın Arkasındaki İsim</h3>
+                    </div>
+                    <div class="lock-badge">🔒</div>
+                </div>
+
+                <!-- Kart 2 -->
+                <div class="selection-card">
+                    <div class="card-img-bg" style="background-image: url('image_17.png');"></div>
+                    <div class="card-overlay">
+                        <div class="card-tag">KULİSLER</div>
+                        <h3 class="card-title">Yemekte Kimler Konuşmadı?</h3>
+                    </div>
+                    <div class="lock-badge">🔒</div>
+                </div>
+
+                <!-- Kart 3 -->
+                <div class="selection-card">
+                    <div class="card-img-bg" style="background-image: url('image_17.png');"></div>
+                    <div class="card-overlay">
+                        <div class="card-tag">SARAYDAN</div>
+                        <h3 class="card-title">Tahtın Gölgesindeki Aşk</h3>
+                    </div>
+                    <div class="lock-badge">🔒</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- İkili Bant: Bilgi ve Söz Alanı (image_20.png Yerleşimi) -->
+        <section class="info-dual-banner">
+            <div class="banner-box banner-left">
+                <h4 style="color:#aa913f; font-size:11pt; letter-spacing:2px; margin-bottom:15px; text-transform:uppercase;">KİMLİĞİNİZ BİZİM ZIRHIMIZDIR</h4>
+                <p style="color:#888; font-size:10pt; line-height:1.6; margin-bottom:10px;">• IP ve cihaz bilgileriniz korunur.</p>
+                <p style="color:#888; font-size:10pt; line-height:1.6; margin-bottom:10px;">• Hikayeniz yayımlanmadan önce editörlerimiz tarafından incelenir.</p>
+                <p style="color:#888; font-size:10pt; line-height:1.6;">• Gerçek dışı, iftira ve yasal risk taşıyan içerikler yayınlanmaz.</p>
+            </div>
+            <div class="banner-box banner-right">
+                <div class="quote-text">“GÜÇ, KONUŞMAMAKTA DEĞİL; DOĞRU ZAMANDA, DOĞRU YERE YAZDIRMAKTADIR.”</div>
+            </div>
+        </section>
+
+        <!-- Sitenin Alt Kısmı, Formlar ve Amblem (image_18.png & image_19.png Yerleşimi) -->
+        <footer class="gazette-footer-structure">
+            <div class="footer-top-grid">
+                
+                <!-- Sol Sütun: Birebir Amblem ve Logo (image_19.png) -->
+                <div class="footer-brand-center">
+                    <div class="lo-crest">
+                        <span>LO</span>
+                    </div>
+                    <div class="footer-logo-text">LADY OMBRA</div>
+                    <div class="footer-sub-text">GİZLİDİR, GÜÇLÜDÜR, YAZAR</div>
+                </div>
+
+                <!-- Orta Sütun: Kurumsal ve Köşeler Linkleri -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="footer-links-col">
+                        <h5>KÖŞELER</h5>
+                        <ul>
+                            <li><a href="#">İtiraflar</a></li>
+                            <li><a href="#">Kulisler</a></li>
+                            <li><a href="#">Saraydan</a></li>
+                            <li><a href="#">Özel Dosyalar</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links-col">
+                        <h5>KURUMSAL</h5>
+                        <ul>
+                            <li><a href="#">Hakkımızda</a></li>
+                            <li><a href="#">Editöryal İlkeler</a></li>
+                            <li><a href="#">Gizlilik Politikası</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Sağ Sütun: Sır Gönderme Paneli (ladyombra@outlook.com Bağlantılı) -->
+                <div class="footer-form-panel" id="story-form-block">
+                    <h4>GÖLGEDE KALMA, BİLDİRİMDE KAL.</h4>
+                    <form action="mailto:ladyombra@outlook.com" method="post" enctype="text/plain">
+                        <input type="text" name="Takma Ad" placeholder="Gizli İsminiz" required>
+                        <textarea name="Sır / Hikaye" rows="4" placeholder="Hikayeniz ilk önce mailimize düşer..." required></textarea>
+                        <button type="submit" class="gold-action-btn" style="width: 100%;">ONAYA GÖNDER</button>
+                    </form>
+                </div>
+
             </div>
 
-            <div class="gazette-grid">
-                <!-- Sol Sütun: Hikayeler -->
-                <div class="main-stories">
-                    
-                    <!-- Standart Herkese Açık Hikaye -->
-                    <div class="story-card">
-                        <div class="author">Kategori: Kulisler | Yazar: MONSIEUR X</div>
-                        <h2>Aynanın Arkasındaki İsim</h2>
-                        <p>Sarayın loş koridorlarında fısıldanan son dedikodu, maskelerin ardındaki asıl yüzü ortaya çıkarıyor. Kimsenin yüksek sesle konuşamadığı o gerçekler, bu gece gölgelerin arasından sızdı...</p>
-                    </div>
-
-                    <!-- KİLİTLİ ÖZEL İÇERİK (Sadece Abonelere Özel Katman) -->
-                    <div class="story-card locked-story">
-                        <div class="author">Kategori: Saraydan | Yazar: LADY OMBRA</div>
-                        <h2>Tahtın Gölgesindeki Aşk</h2>
-                        <div class="locked-blur">
-                            Venedik kanallarından yükselen fısıltılar, diplomatik evliliklerin ardındaki büyük ihaneti işaret ediyor. 
-                            Dükün en yakın dostu ile yapılan gizli mektuplaşmalar, dün gece sarayın mühürlü odasında ele geçirildi. 
-                            Belgelerin üzerinde parıldayan o imza her şeyi değiştirecek nitelikte...
-                        </div>
-                        <!-- Lüks Kilit Katmanı (image_5.png ve image_4.png esintisi) -->
-                        <div class="lock-overlay">
-                            <div class="lock-icon">🔒</div>
-                            <div class="lock-title">Bu Hikaye Çok Önemli Bir Sır Barındırıyor</div>
-                            <p style="font-size: 10pt; color: #888; margin-bottom: 15px; text-align: center;">Gerçekleri sadece seçkin aboneler görebilir.</p>
-                            <button class="gold-button" style="width: auto; padding: 8px 20px; font-size: 9pt;" onclick="document.getElementById('email-sub').focus();">Özel Hikayelere Abone Ol</button>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- Sağ Sütun: Formlar ve Paneller -->
-                <div class="side-panel">
-                    
-                    <!-- Lüks Abonelik Modülü -->
-                    <div class="form-panel">
-                        <h3>Gölgeye Katıl (Abone Ol)</h3>
-                        <p style="font-size: 9.5pt; color: #888; margin-bottom: 15px;">Özel hikayelerden ve kozmik konulardan anında haberdar olmak için e-postanızı bırakın.</p>
-                        <input type="email" id="email-sub" placeholder="E-posta Adresiniz" required>
-                        <button class="gold-button" onclick="alert('Abonelik talebiniz alındı.')">Abone Ol</button>
-                    </div>
-
-                    <!-- Hikaye Gönderme Paneli -->
-                    <div class="form-panel">
-                        <h3>Sırrını Bırak</h3>
-                        <form action="mailto:ladyombra@outlook.com" method="post" enctype="text/plain">
-                            <input type="text" name="Takma İsim" placeholder="Gizli Takma Adınız (Örn: Lady Violet)" required>
-                            <textarea name="Hikaye" rows="5" placeholder="Hikayeniz ilk önce bizim onayımıza düşecektir..." required></textarea>
-                            <button type="submit" class="gold-button">Onaya Gönder</button>
-                        </form>
-                    </div>
-
-                </div>
+            <div style="text-align:center; border-top:1px solid #111; padding-top:30px; font-size:9pt; color:#444;">
+                © 2026 Lady Ombra bir yayın organıdır. Tüm hakları saklıdır.
             </div>
-        </div>
+        </footer>
     </div>
 
-    <!-- Görünmez Yönetici Giriş Modalı -->
-    <div id="admin-modal" class="admin-modal">
-        <div class="admin-box">
-            <h3 style="color: #d4af37; margin-bottom: 20px; text-align: center; font-weight: normal; letter-spacing: 2px;">LADY OMBRA ADMİN</h3>
-            <input type="password" id="admin-pass" placeholder="Mistik Şifre">
-            <button class="gold-button" onclick="checkAdminPassword()">Giriş Yap</button>
+    <!-- Tamamen Gizli Yönetici Giriş Alanı -->
+    <div id="admin-modal" class="hidden-admin-modal">
+        <div class="admin-entry-box">
+            <h3 style="color:#d4af37; font-weight:normal; margin-bottom:20px; letter-spacing:2px;">LADY OMBRA KONTROL</h3>
+            <input type="password" id="admin-pass" style="width:100%; padding:10px; background:#000; border:1px solid #332a15; color:#fff; margin-bottom:15px; text-align:center;">
+            <button class="gold-action-btn" style="width:100%;" onclick="checkAdminPortal()">Giriş</button>
         </div>
     </div>
 
     <script>
-        function openEnvelope() {
-            const seal = document.getElementById('seal');
-            seal.style.transform = 'scale(0.8) rotate(-15deg)';
-            setTimeout(() => {
-                document.getElementById('splash-screen').style.opacity = '0';
-                document.getElementById('splash-screen').style.visibility = 'hidden';
-                document.getElementById('main-site').style.visibility = 'visible';
-                document.getElementById('main-site').style.opacity = '1';
-            }, 800);
+        function enterLadyOmbra() {
+            document.getElementById('splash-screen').style.opacity = '0';
+            document.getElementById('splash-screen').style.visibility = 'hidden';
+            document.getElementById('main-site').style.visibility = 'visible';
+            document.getElementById('main-site').style.opacity = '1';
         }
 
-        // Görünmez Klavye Tetikleyicisi ("ombra" yazınca admin açılır)
-        let inputSecret = "";
-        const targetSecret = "ombra";
+        // Tamamen Görünmez Klavye Kısayolu ("ombra" yazınca tetiklenir)
+        let inputPattern = "";
+        const targetPattern = "ombra";
         window.addEventListener('keydown', function(e) {
             if(e.key.length === 1) {
-                inputSecret += e.key.toLowerCase();
-                if (inputSecret.length > targetSecret.length) { inputSecret = inputSecret.slice(-targetSecret.length); }
-                if (inputSecret === targetSecret) { document.getElementById('admin-modal').style.display = 'flex'; inputSecret = ""; }
+                inputPattern += e.key.toLowerCase();
+                if (inputPattern.length > targetPattern.length) { inputPattern = inputPattern.slice(-targetPattern.length); }
+                if (inputPattern === targetPattern) { document.getElementById('admin-modal').style.display = 'flex'; inputPattern = ""; }
             }
         });
-        
-        function checkAdminPassword() {
-            if(document.getElementById('admin-pass').value === "ombra1905") { 
+
+        function checkAdminPortal() {
+            if(document.getElementById('admin-pass').value === "ombra1905") {
                 alert("Hoş geldiniz Leydim."); document.getElementById('admin-modal').style.display = 'none';
             } else {
-                alert("Reddedildi."); document.getElementById('admin-modal').style.display = 'none';
+                alert("Erişim Reddedildi."); document.getElementById('admin-modal').style.display = 'none';
             }
         }
     </script>
